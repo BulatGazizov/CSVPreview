@@ -13,9 +13,6 @@ namespace uninstall
         static void Main(string[] args)
         {
             Console.WriteLine("UnInstalling CSVPreview...");
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            path = System.IO.Path.GetDirectoryName(path);
-            //string destination = Environment.ExpandEnvironmentVariables(@"%LOCALAPPDATA%") + @"\CSVPreview";
             string destination = Environment.ExpandEnvironmentVariables(@"%APPDATA%") + @"\CSVPreview";
 
             Console.WriteLine("Deleting files...");
@@ -37,7 +34,6 @@ namespace uninstall
             
             Console.WriteLine("Unregistring CSVPreview...");
 
-            //Microsoft.Win32.RegistryKey key;
             RegistryKey hklm = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64);
             RegistryKey key = hklm.OpenSubKey(@"SOFTWARE\Classes\*\shell", true);
 
@@ -45,10 +41,6 @@ namespace uninstall
             {
                 key.DeleteSubKeyTree("CSVPreview");
             }
-            //key = key.CreateSubKey("CSVPreview");
-            //key.SetValue("icon", destination + @"\CSVPreview.ico");
-            //key = key.CreateSubKey("command");
-            //key.SetValue("", destination + "\\CSVPreview.exe \"%1\"");
 
 
 
