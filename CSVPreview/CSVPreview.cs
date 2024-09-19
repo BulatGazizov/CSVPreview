@@ -31,13 +31,31 @@ namespace CSVPreview
             parser.FirstRowHasHeader = this.chkFirstRowHasHeader.Checked;
             parser.SkipStartingDataRows = (int)Math.Round(this.txtSkipFirstRows.Value);
             parser.MaxBufferSize = 4096;
-            parser.MaxRows = IsNumeric(this.cmbPreviewRows.Text) ? int.Parse(this.cmbPreviewRows.Text) : 100;
+            parser.MaxRows = GetMaxRows();
             parser.TextQualifier = GetTextQualifier();
 
             DataTable dt = parser.GetDataTable();
             return dt; // DataTable();
         }
 
+        private void EnumerateRows()
+        {
+            int rowNumber = 1;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+                row.HeaderCell.Value = rowNumber.ToString();
+                rowNumber = rowNumber + 1;
+            }
+            dataGridView1.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
+        }
+        private int GetMaxRows()
+        {
+            int maxRows = 0;
+            if (IsNumeric(this.cmbPreviewRows.Text))
+                maxRows = int.Parse(this.cmbPreviewRows.Text);
+            return maxRows;
+        }
         private char? GetColumnDelimiter()
         {
             string delimiter = this.cmbColumnDelimiter.Text;
@@ -82,13 +100,19 @@ namespace CSVPreview
 
         private void CSVPreview_Load(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             this.dataGridView1.DataSource = ReadFile();
+            EnumerateRows();
+            this.Cursor = Cursors.Default;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             this.dataGridView1.DataSource = null;
             this.dataGridView1.DataSource = ReadFile();
+            EnumerateRows();
+            this.Cursor = Cursors.Default;
         }
         public bool IsNumeric(string value)
         {

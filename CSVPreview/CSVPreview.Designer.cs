@@ -97,7 +97,9 @@
             this.cmbPreviewRows.Items.AddRange(new object[] {
             "100",
             "500",
-            "1000"});
+            "1000",
+            "10000",
+            "All"});
             this.cmbPreviewRows.Location = new System.Drawing.Point(124, 8);
             this.cmbPreviewRows.Name = "cmbPreviewRows";
             this.cmbPreviewRows.Size = new System.Drawing.Size(171, 28);
