@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSVPreview));
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtSkipFirstRows = new System.Windows.Forms.NumericUpDown();
@@ -44,8 +45,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.analizeColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbFormat = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSkipFirstRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -54,6 +53,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.panel1.Controls.Add(this.txtSkipFirstRows);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.cmbPreviewRows);
@@ -67,32 +67,35 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2411, 49);
+            this.panel1.Size = new System.Drawing.Size(2411, 38);
             this.panel1.TabIndex = 0;
             // 
             // txtSkipFirstRows
             // 
-            this.txtSkipFirstRows.Location = new System.Drawing.Point(1255, 8);
+            this.txtSkipFirstRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSkipFirstRows.Location = new System.Drawing.Point(1612, 4);
             this.txtSkipFirstRows.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.txtSkipFirstRows.Name = "txtSkipFirstRows";
-            this.txtSkipFirstRows.Size = new System.Drawing.Size(120, 26);
+            this.txtSkipFirstRows.Size = new System.Drawing.Size(120, 30);
             this.txtSkipFirstRows.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1126, 11);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1409, 6);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 20);
+            this.label5.Size = new System.Drawing.Size(189, 25);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Skip First Rows:";
+            this.label5.Text = "Skip First N Rows:";
             // 
             // cmbPreviewRows
             // 
+            this.cmbPreviewRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbPreviewRows.FormattingEnabled = true;
             this.cmbPreviewRows.Items.AddRange(new object[] {
             "100",
@@ -100,33 +103,37 @@
             "1000",
             "10000",
             "All"});
-            this.cmbPreviewRows.Location = new System.Drawing.Point(124, 8);
+            this.cmbPreviewRows.Location = new System.Drawing.Point(176, 3);
             this.cmbPreviewRows.Name = "cmbPreviewRows";
-            this.cmbPreviewRows.Size = new System.Drawing.Size(171, 28);
+            this.cmbPreviewRows.Size = new System.Drawing.Size(171, 33);
             this.cmbPreviewRows.TabIndex = 9;
             this.cmbPreviewRows.Text = "100";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 12);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 20);
+            this.label4.Size = new System.Drawing.Size(153, 25);
             this.label4.TabIndex = 8;
             this.label4.Text = "Preview Rows:";
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(1399, 6);
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Location = new System.Drawing.Point(1771, 0);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(85, 31);
+            this.btnRefresh.Size = new System.Drawing.Size(140, 38);
             this.btnRefresh.TabIndex = 7;
             this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // cmbColumnDelimiter
             // 
+            this.cmbColumnDelimiter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbColumnDelimiter.FormattingEnabled = true;
             this.cmbColumnDelimiter.Items.AddRange(new object[] {
             "Semicolon {;}",
@@ -134,18 +141,19 @@
             "Comma {,}",
             "Tab {t}",
             "Vertical Bar {|}"});
-            this.cmbColumnDelimiter.Location = new System.Drawing.Point(932, 7);
+            this.cmbColumnDelimiter.Location = new System.Drawing.Point(1195, 3);
             this.cmbColumnDelimiter.Name = "cmbColumnDelimiter";
-            this.cmbColumnDelimiter.Size = new System.Drawing.Size(171, 28);
+            this.cmbColumnDelimiter.Size = new System.Drawing.Size(171, 33);
             this.cmbColumnDelimiter.TabIndex = 6;
             this.cmbColumnDelimiter.Text = "Vertical Bar {|}";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(798, 11);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(993, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 20);
+            this.label3.Size = new System.Drawing.Size(183, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Column Delimiter:";
             // 
@@ -154,28 +162,31 @@
             this.chkFirstRowHasHeader.AutoSize = true;
             this.chkFirstRowHasHeader.Checked = true;
             this.chkFirstRowHasHeader.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkFirstRowHasHeader.Location = new System.Drawing.Point(577, 9);
+            this.chkFirstRowHasHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkFirstRowHasHeader.Location = new System.Drawing.Point(666, 4);
             this.chkFirstRowHasHeader.Name = "chkFirstRowHasHeader";
             this.chkFirstRowHasHeader.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkFirstRowHasHeader.Size = new System.Drawing.Size(196, 24);
+            this.chkFirstRowHasHeader.Size = new System.Drawing.Size(266, 29);
             this.chkFirstRowHasHeader.TabIndex = 4;
-            this.chkFirstRowHasHeader.Text = "First Row Has Header ";
+            this.chkFirstRowHasHeader.Text = "  :First Row Has Header";
             this.chkFirstRowHasHeader.UseVisualStyleBackColor = true;
             // 
             // txtTextQualifier
             // 
-            this.txtTextQualifier.Location = new System.Drawing.Point(448, 8);
+            this.txtTextQualifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTextQualifier.Location = new System.Drawing.Point(546, 4);
             this.txtTextQualifier.Name = "txtTextQualifier";
-            this.txtTextQualifier.Size = new System.Drawing.Size(79, 26);
+            this.txtTextQualifier.Size = new System.Drawing.Size(79, 30);
             this.txtTextQualifier.TabIndex = 3;
             this.txtTextQualifier.Text = "\"";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 11);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(383, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 20);
+            this.label2.Size = new System.Drawing.Size(144, 25);
             this.label2.TabIndex = 2;
             this.label2.Text = "Text qualifier:";
             // 
@@ -184,16 +195,26 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.AliceBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 49);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 16;
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(2411, 1141);
+            this.dataGridView1.Size = new System.Drawing.Size(2411, 1152);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
             // 
@@ -213,27 +234,6 @@
             this.analizeColumnToolStripMenuItem.Text = "Analize Column";
             this.analizeColumnToolStripMenuItem.Click += new System.EventHandler(this.analizeColumnToolStripMenuItem_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1487, 231);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Format:";
-            // 
-            // cmbFormat
-            // 
-            this.cmbFormat.FormattingEnabled = true;
-            this.cmbFormat.Items.AddRange(new object[] {
-            "Delimited",
-            "Fixed Width"});
-            this.cmbFormat.Location = new System.Drawing.Point(1551, 227);
-            this.cmbFormat.Name = "cmbFormat";
-            this.cmbFormat.Size = new System.Drawing.Size(171, 28);
-            this.cmbFormat.TabIndex = 1;
-            this.cmbFormat.Text = "Delimited";
-            // 
             // CSVPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -241,8 +241,6 @@
             this.ClientSize = new System.Drawing.Size(2411, 1190);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cmbFormat);
-            this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CSVPreview";
             this.Text = "CSV Preview";
@@ -253,7 +251,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -262,8 +259,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbFormat;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkFirstRowHasHeader;
         private System.Windows.Forms.TextBox txtTextQualifier;
         private System.Windows.Forms.ComboBox cmbColumnDelimiter;

@@ -40,7 +40,8 @@ namespace CSVPreview
 
         private void EnumerateRows()
         {
-            int rowNumber = 1;
+            int rowNumber = 1 + (int)Math.Round(this.txtSkipFirstRows.Value);
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.IsNewRow) continue;
@@ -109,6 +110,7 @@ namespace CSVPreview
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
             this.dataGridView1.DataSource = null;
             this.dataGridView1.DataSource = ReadFile();
             EnumerateRows();
