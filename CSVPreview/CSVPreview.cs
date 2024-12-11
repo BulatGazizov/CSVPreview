@@ -1,4 +1,5 @@
 ﻿using GenericParsing;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CSVPreview
 {
@@ -142,6 +144,85 @@ namespace CSVPreview
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             if(ColumnIndex<0) e.Cancel = true;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Search search = new Search(this.dataGridView1.DataSource as DataTable);
+            search.StartPosition = FormStartPosition.Manual;
+            search.Location = new Point(this.Location.X + this.Width - search.Width - 30, this.Location.Y  + 70)   ;
+            if(search.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                string WhereToSearch = search.cmbArea.SelectedItem.ToString();
+                string SearchValue = search.txtSearchFor.Text.Trim();
+                if (WhereToSearch.Equals("Everywhere")) 
+                    SearchEverywhere(SearchValue);
+                else
+                    SearchColumn(WhereToSearch, SearchValue);
+
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void SearchColumn(string whereToSearch, string SearchValue)
+        {
+            DataGridViewSelectionMode dataGridViewSelectionMode = this.dataGridView1.SelectionMode;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                        if (row.Cells[whereToSearch].Value.ToString().Contains(SearchValue))
+                        {
+                            row.Selected = true;
+                            continue;
+                        }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            dataGridView1.SelectionMode = dataGridViewSelectionMode;
+        }
+
+        private void SearchEverywhere(string SearchValue)
+        {
+            DataGridViewSelectionMode dataGridViewSelectionMode = this.dataGridView1.SelectionMode;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Value.ToString().Contains(SearchValue))
+                        {
+                            row.Selected = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            dataGridView1.SelectionMode = dataGridViewSelectionMode;
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            if(this.dataGridView1.DataSource == null) return;
+            string fileName = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".xlsx";
+            using (ExcelPackage pck = new ExcelPackage(fileName))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+                ws.Cells["A1"].LoadFromDataTable(this.dataGridView1.DataSource as DataTable, true);
+                pck.Save();
+            }
+            System.Diagnostics.Process.Start(fileName); 
         }
     }
 }
